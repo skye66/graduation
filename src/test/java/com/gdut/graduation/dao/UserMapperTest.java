@@ -23,10 +23,9 @@ public class UserMapperTest {
     private UserMapper userMapper;
 
     @Test
-    public void getUserByIdTest(){
-
-//        User user = userMapper.getUserById(1);
-//        Assert.assertNotNull(user);
+    public void selectByPrimaryKey(){
+        User user = userMapper.selectByPrimaryKey(1);
+        Assert.assertNotEquals(user.getId(),new Integer(1));
     }
     @Test
     public void test(){
