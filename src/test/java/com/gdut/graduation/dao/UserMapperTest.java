@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 import static org.junit.Assert.*;
 
 /**
@@ -25,7 +26,7 @@ public class UserMapperTest {
     @Test
     public void selectByPrimaryKey(){
         User user = userMapper.selectByPrimaryKey(1);
-        Assert.assertNotEquals(user.getId(),new Integer(1));
+        Assert.assertEquals(user.getId(),new Integer(1));
     }
     @Test
     public void test(){

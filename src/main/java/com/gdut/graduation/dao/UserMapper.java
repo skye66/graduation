@@ -1,6 +1,8 @@
 package com.gdut.graduation.dao;
 
 import com.gdut.graduation.pojo.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -43,4 +45,14 @@ public interface UserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(User record);
+
+    /**
+     * 通过用户名和密码获取用户的信息
+     */
+    User selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    /**
+     * 通过用户名查找用户，判断用户是否注册
+     */
+    int selectByUsername(String username);
 }
