@@ -1,0 +1,11 @@
+server:
+  servlet:
+    context-path: /gruduation
+spring:
+  datasource:
+    username: root
+    password: skye
+    url: jdbc:mysql://localhost:4306/graduation?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
