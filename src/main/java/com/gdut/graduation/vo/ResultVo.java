@@ -19,6 +19,11 @@ public class ResultVo<T> {
         this.code = code;
         this.msg = msg;
     }
+    private ResultVo(T data,int code,String msg){
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
 
     /**
      * 返回一个成功的消息
@@ -29,6 +34,13 @@ public class ResultVo<T> {
      */
     public static<T> ResultVo<T> createBySuccess(int code,String msg){
         return new ResultVo<>(code,msg);
+    }
+
+    public static<T> ResultVo<T> createBySuccess(T data,int code,String msg){
+        return new ResultVo<>(data,code,msg);
+    }
+    public static<T> ResultVo<T> createBySuccess(T data){
+        return new ResultVo<>(data,ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMsg());
     }
 
     public static<T> ResultVo<T> createBySuccess(int code){
@@ -46,4 +58,10 @@ public class ResultVo<T> {
     public static <T> ResultVo<T> createByError(int code,String msg){
         return new ResultVo<>(code,msg);
     }
+
+    public static <T> ResultVo<T> createByError(ResultEnum resultEnum){
+        return new ResultVo<>(resultEnum.getCode(),resultEnum.getMsg());
+    }
+
+
 }

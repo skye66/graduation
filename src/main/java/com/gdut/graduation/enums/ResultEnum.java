@@ -20,7 +20,8 @@ public enum  ResultEnum {
     USER_UPDATE_ERROR(1002,"更新用户信息失败"),
     USER_USERNAME_PASSWORD(1003,"用户名或者密码错误"),
     USER_EXISTS(1004,"用户已存在"),
-    USER_CREATE_ERROR(1005,"用户添加失败")
+    USER_CREATE_ERROR(1005,"用户添加失败"),
+    USER_NO_LOGIN(1006,"当前用户未登录"),
 
 
     ;

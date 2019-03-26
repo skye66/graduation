@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto updateUserInformation(User user) {
-        User update = userMapper.selectByPrimaryKey(user.getId());
-        if (update != null) {
-            int count = userMapper.updateByPrimaryKey(update);
-            if (count>0) return User2UserDto.convertToDto(update);
+
+        if (userMapper.selectByPrimaryKey(user.getId()) != null) {
+            int count = userMapper.updateByPrimaryKey(user);
+            if (count>0) return User2UserDto.convertToDto(user);
         }
         throw  new GraduationException(ResultEnum.USER_UPDATE_ERROR);
     }
