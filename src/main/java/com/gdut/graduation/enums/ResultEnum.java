@@ -23,6 +23,14 @@ public enum  ResultEnum {
     USER_CREATE_ERROR(1005,"用户添加失败"),
     USER_NO_LOGIN(1006,"当前用户未登录"),
 
+    /**
+     * 类目的错误信息20xx
+     */
+    CATEGORY_ID_EMPTY(2001,"类目id为空"),
+    CATEGORY_UPDATE_ERROR(2002,"类目更新失败"),
+    CATEGORY_EMPTY(2003,"类目不存在"),
+    CATEGORY_CREATE_ERROR(2004,"添加失败"),
+
 
     ;
 

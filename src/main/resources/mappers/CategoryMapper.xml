@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdut.graduation.dao.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.gdut.graduation.pojo.Category">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="parent_id" property="parentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="update_time" property="updateTime" jdbcType="DATE" javaType="java.util.Date"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,parent_id,name,create_time,update_time
+    </sql>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="int">
+        select
+        <include refid="Base_Column_List"/>
+        from graduation_category
+        where id=#{id}
+    </select>
+    <update id="updateByCategory" parameterType="com.gdut.graduation.pojo.Category">
+        update graduation_category
+        set
+          parent_id=#{parentId,jdbcType=VARCHAR},
+          name = #{name,jdbcType=VARCHAR},
+          update_time=now()
+        where id=#{id,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteByCategory" parameterType="int">
+        delete from graduation_category
+        where
+        id=#{id}
+    </delete>
+    <insert id="insert" parameterType="com.gdut.graduation.pojo.Category">
+        insert into graduation_category(
+        id,parent_id,name,create_time,update_time
+        )
+        values (
+        #{id,jdbcType=INTEGER},#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},now(),now()
+        )
+    </insert>
+    <select id="selectParallelId" resultMap="BaseResultMap" parameterType="int">
+        select
+        <include refid="Base_Column_List"/>
+        from graduation_category
+        where parent_id=#{parentId}
+    </select>
+</mapper>

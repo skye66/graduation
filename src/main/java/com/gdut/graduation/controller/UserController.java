@@ -7,13 +7,9 @@ import com.gdut.graduation.pojo.User;
 import com.gdut.graduation.serveice.UserService;
 import com.gdut.graduation.vo.ResultVo;
 import common.Const;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @PostMapping("/login")
-    public ResultVo login(@Param("username") String username, @Param("password") String password, HttpSession session){
+    public ResultVo login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
 
         if (StringUtils.isEmpty(username)||StringUtils.isEmpty(password)){
             throw new GraduationException(ResultEnum.PARAM_ERROR);
