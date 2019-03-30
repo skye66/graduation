@@ -11,4 +11,9 @@ public class Const {
      * 用户登陆session key
      */
     public static final String CURRENT_USER = "currentUser";
+
+    /**
+     * 产品状态0，表示在售
+     */
+    public static final Integer ON_SALE = 0;
 }

@@ -9,7 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description
@@ -42,6 +45,30 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<Category> categoryList = categoryMapper.selectParallelId(category.getParentId());
         return categoryList;
+    }
+
+    @Override
+    public Set<Category> getChildParallelCategory(int parentId) {
+        Set<Category> categorySet = new HashSet<>();
+        getChildParallelCategory(categoryMapper.selectById(parentId),categorySet);
+        return categorySet;
+    }
+    private  List<Category> getChildCategory(Integer parentId){
+        List<Category> categoryList=null;
+        if (parentId != null) {
+             categoryList = categoryMapper.selectParallelId(parentId);
+        }
+        return categoryList;
+    }
+    private void getChildParallelCategory(Category category, Set<Category> categorySet) {
+        if (category==null) return;
+        categorySet.add(category);
+        List<Category> childCategory = getChildCategory(category.getId());
+        for (Category item : childCategory) {
+            if (!categorySet.contains(item)) {
+                getChildParallelCategory(item, categorySet);
+            }
+        }
     }
 
     @Override

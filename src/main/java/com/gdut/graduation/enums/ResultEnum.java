@@ -31,6 +31,13 @@ public enum  ResultEnum {
     CATEGORY_EMPTY(2003,"类目不存在"),
     CATEGORY_CREATE_ERROR(2004,"添加失败"),
 
+    /**
+     * 产品类的提示信息30xx
+     */
+    PRODUCT_PARAM_ERROR(3001,"参数错误"),
+    PRODUCT_NOT_EXISTS(3002,"产品不存在"),
+    PRODUCT_UPDATE_CREATE_ERROR(3003,"新增或更新失败"),
+
 
     ;
 

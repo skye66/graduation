@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -64,5 +65,11 @@ public class CategoryServiceImplTest {
         Category res = categoryService.createCategory(category);
 
         Assert.assertNotNull(res);
+    }
+
+    @Test
+    public void getParallelAndChildId(){
+        Set<Category> categorySet = categoryService.getChildParallelCategory(20);
+        Assert.assertNotEquals(0,categorySet.size());
     }
 }

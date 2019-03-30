@@ -3,6 +3,7 @@ package com.gdut.graduation.serveice;
 import com.gdut.graduation.pojo.Category;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description 类目接口
@@ -24,6 +25,13 @@ public interface CategoryService {
      * @return
      */
     List<Category> getParallelId(int categoryId);
+
+    /**
+     * 获取平级节点和所有自己点的id
+     * @param parentId
+     * @return
+     */
+    Set<Category> getChildParallelCategory(int parentId);
 
     /**
      * 更新类目的信息
