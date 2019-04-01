@@ -21,6 +21,7 @@ public class GraduationException extends RuntimeException {
     }
     public GraduationException(int code,String msg){
         super(msg);
+        this.msg = msg;
         this.code = code;
     }
 }

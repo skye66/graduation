@@ -38,6 +38,14 @@ public enum  ResultEnum {
     PRODUCT_NOT_EXISTS(3002,"产品不存在"),
     PRODUCT_UPDATE_CREATE_ERROR(3003,"新增或更新失败"),
 
+    /**
+     * 购物车的提示信息40xx
+     */
+    SHIPPING_INSERT_ERROR(4001,"新建收货信息失败"),
+    SHIPPING_DEL_ERROR(4002,"收货地址删除失败"),
+    SHIPPING_UPDATE_ERROR(4003,"收货地址更新错误"),
+    SHIPPING_SELECT_ERROR(4004,"不存在收获信息")
+
 
     ;
 
