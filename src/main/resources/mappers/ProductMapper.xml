@@ -17,6 +17,10 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <sql id="BaseColumnMap">
+    id, `name`, category_id, price, stock, icon, detail, `status`, create_time,
+    update_time
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -110,4 +114,15 @@
       </foreach>
     </if>
   </select>
+    <select id="selectByProductIds" resultMap="BaseResultMap" parameterType="map">
+      select
+      <include refid="BaseColumnMap"></include>
+      from graduation_product
+      where id in
+      <if test="productIdList!=null">
+        <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+        </foreach>
+      </if>
+    </select>
 </mapper>

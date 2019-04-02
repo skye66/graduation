@@ -80,4 +80,5 @@ public interface ProductService {
     PageInfo<List<ProductDto>> searchProductListByCategoryKeyWord(Integer categoryId, String keyword, int pageNum,int pageSize);
 
 
+    //List<Product> selectProductInProductIds();
 }
