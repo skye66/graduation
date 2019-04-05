@@ -1,4 +1,4 @@
-package com.gdut.graduation.controller;
+package com.gdut.graduation.controller.portal;
 
 import com.gdut.graduation.enums.ResultEnum;
 import com.gdut.graduation.exception.GraduationException;
@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description 类目的控制器
@@ -19,9 +20,9 @@ import java.util.List;
  * @Version 1.0
  **/
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/manage/category")
 @Slf4j
-public class CategoryController {
+public class CategoryManageController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/information")
@@ -69,5 +70,10 @@ public class CategoryController {
         }
         List<Category> categoryList = categoryService.getParallelId(categoryId);
         return ResultVo.createBySuccess(categoryList);
+    }
+    @GetMapping("/deep_children_category")
+    public ResultVo deepChildrenCategory(@RequestParam(value = "category_id",defaultValue = "0") Integer categoryId){
+        Set<Category> categorySet = categoryService.getChildParallelCategory(categoryId);
+        return ResultVo.createBySuccess(categorySet);
     }
 }

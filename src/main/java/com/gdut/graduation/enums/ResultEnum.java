@@ -22,6 +22,7 @@ public enum  ResultEnum {
     USER_EXISTS(1004,"用户已存在"),
     USER_CREATE_ERROR(1005,"用户添加失败"),
     USER_NO_LOGIN(1006,"当前用户未登录"),
+    USER_NOT_ADMIN(1007,"不是管理员"),
 
     /**
      * 类目的错误信息20xx
@@ -37,6 +38,8 @@ public enum  ResultEnum {
     PRODUCT_PARAM_ERROR(3001,"参数错误"),
     PRODUCT_NOT_EXISTS(3002,"产品不存在"),
     PRODUCT_UPDATE_CREATE_ERROR(3003,"新增或更新失败"),
+    PRODUCT_NOT_ON_SALE(3004,"产品不是在售状态"),
+    PRODUCT_STOCK_NOT_ENOUGH(3005,"产品库存不足"),
 
     /**
      * 收获地址的提示信息40xx
@@ -54,6 +57,13 @@ public enum  ResultEnum {
     CART_DELETE_ERROR(5003,"删除购物车失败"),
     CART_PARAM_ERROR(5004,"购物车参数错误"),
     CART_NOT_EXISTS(5005,"购物车不存在"),
+
+    /**
+     * 订单提示信息60xx
+     */
+    ORDER_NOT_EXISTS(6001,"订单不存在"),
+    ORDER_CREATE_ERROR(6002,"订单创建失败"),
+    ORDER_STATUS_UPDATE_ERROR(6003,"订单已支付或已取消"),
 
 
     ;

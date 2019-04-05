@@ -33,6 +33,64 @@ public class Const {
 
     public static final String image_host="http://www.xxx.com";
 
+    public interface Role{
+        int ROLE_ADMIN = 1;
+        int ROLE_USER=0;
+    }
+
+    public enum OrderStatusEnum{
+        CANCELED(0,"已取消"),
+        NO_PAY(10,"未支付"),
+        PAID(20,"已支付"),
+        SHIPPED(40,"已发货"),
+        ORDER_SUCCESS(50,"订单完成"),
+        ORDER_CLOSE(60,"订单关闭");
+        int code;
+        String msg;
+        OrderStatusEnum(int code,String msg){
+            this.code = code;
+            this.msg = msg;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+        public static OrderStatusEnum codeOf(int code){
+            for (OrderStatusEnum item:
+            OrderStatusEnum.values()){
+                if (item.code==code) return item;
+            }
+            throw new RuntimeException("没有找到对应的枚举类");
+        }
+    }
+    public enum PaymentStatusEnum{
+        ONLINE_PAY(1,"在线支付");
+        int code;
+        String msg;
+        PaymentStatusEnum(int code,String msg){
+            this.code = code;
+            this.msg = msg;
+        }
+        public int getCode() {
+            return code;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+        public static OrderStatusEnum codeOf(int code){
+            for (OrderStatusEnum item:
+                    OrderStatusEnum.values()){
+                if (item.code==code) return item;
+            }
+            throw new RuntimeException("没有找到对应的枚举类");
+        }
+    }
+
 
 
 

@@ -52,6 +52,9 @@ public class ResultVo<T> {
     public static <T> ResultVo<T> createByError(){
         return new ResultVo<>(ResultEnum.ERROR.getCode(),ResultEnum.ERROR.getMsg());
     }
+    public static <T> ResultVo<T> createByError(String msg){
+        return new ResultVo<>(ResultEnum.ERROR.getCode(),msg);
+    }
     public static <T> ResultVo<T> createByError(int code){
         return new ResultVo<>(code,ResultEnum.ERROR.getMsg());
     }
