@@ -32,4 +32,21 @@ public interface UserService {
      * @return
      */
     UserDto createUser(User user);
+
+    /**
+     * 校验值是否存在
+     * @param value 值内容
+     * @param type 值类型（email、username）
+     * @return 字符串，提示信息
+     */
+    String checkValid(String value,String type);
+
+    /**
+     * 重置密码
+     * @param passwordOld 旧密码
+     * @param passwordNew 新密码
+     * @param username 用户信息
+     * @return
+     */
+    boolean resetPassword(String passwordOld,String passwordNew, String username);
 }

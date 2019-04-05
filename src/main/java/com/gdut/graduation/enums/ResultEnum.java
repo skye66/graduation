@@ -23,6 +23,10 @@ public enum  ResultEnum {
     USER_CREATE_ERROR(1005,"用户添加失败"),
     USER_NO_LOGIN(1006,"当前用户未登录"),
     USER_NOT_ADMIN(1007,"不是管理员"),
+    USER_EMAIL_EXISTS(1008,"邮件已存在"),
+    USER_USERNAME_EXISTS(1009,"用户名已存在"),
+    USER_CHECK_TYPE_ERROR(1010,"校验类型错误"),
+    USER_CHECK_SUCCESS(1011,"校验通过"),
 
     /**
      * 类目的错误信息20xx

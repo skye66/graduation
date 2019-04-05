@@ -7,8 +7,10 @@ import com.gdut.graduation.enums.ResultEnum;
 import com.gdut.graduation.exception.GraduationException;
 import com.gdut.graduation.pojo.User;
 import com.gdut.graduation.serveice.UserService;
+import common.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * @Description
@@ -72,5 +74,40 @@ public class UserServiceImpl implements UserService {
         int res = userMapper.insert(user);
         if (res == 0) throw new GraduationException(ResultEnum.USER_CREATE_ERROR);
         return User2UserDto.convertToDto(user);
+    }
+
+    @Override
+    public String checkValid(String value, String type) {
+        if (StringUtils.isEmpty(value)){
+            throw  new GraduationException(ResultEnum.PARAM_ERROR);
+        }
+        if (Const.Type.EMAIL.equals(type)){
+            int count = userMapper.checkEmail(value);
+            if (count!=0){
+                throw  new GraduationException(ResultEnum.USER_EMAIL_EXISTS);
+            }
+        }else if (Const.Type.USERNAME.equals(type)){
+            int count = userMapper.checkUsername(value);
+            if (count!=0){
+                throw  new GraduationException(ResultEnum.USER_USERNAME_EXISTS);
+            }
+        }else {
+            throw new GraduationException(ResultEnum.USER_CHECK_TYPE_ERROR);
+        }
+        return ResultEnum.USER_CHECK_SUCCESS.getMsg();
+    }
+
+    @Override
+    public boolean resetPassword(String passwordOld, String passwordNew,String username) {
+        User user = userMapper.selectByUsernameAndPassword(username,passwordOld);
+
+        if (user!=null){
+            user.setPassword(passwordNew);
+            int count = userMapper.updateByPrimaryKey(user);
+            if (count > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

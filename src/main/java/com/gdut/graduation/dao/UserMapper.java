@@ -55,4 +55,26 @@ public interface UserMapper {
      * 通过用户名查找用户，判断用户是否注册
      */
     int selectByUsername(String username);
+
+    /**
+     * 校验邮件是否存在
+     * @param email
+     * @return
+     */
+    int checkEmail(String email);
+
+    /**
+     * 教养邮件是否存在
+     * @param username
+     * @return
+     */
+    int checkUsername(String username);
+
+    /**
+     * 校验密码，用户id和用户密码
+     * @param password
+     * @param userId
+     * @return
+     */
+    int checkPassword(@Param("password") String password,@Param("userId") Integer userId);
 }

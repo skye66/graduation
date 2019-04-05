@@ -37,6 +37,10 @@ public class Const {
         int ROLE_ADMIN = 1;
         int ROLE_USER=0;
     }
+    public interface Type{
+        String USERNAME="username";
+        String EMAIL="email";
+    }
 
     public enum OrderStatusEnum{
         CANCELED(0,"已取消"),
