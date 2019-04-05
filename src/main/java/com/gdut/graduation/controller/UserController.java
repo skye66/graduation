@@ -70,4 +70,19 @@ public class UserController {
         return ResultVo.createBySuccess(res);
     }
 
+    @GetMapping("/check_valid")
+    public ResultVo checkValid(@RequestParam("value") String value,@RequestParam("type") String type){
+        String res = userService.checkValid(value, type);
+        return ResultVo.createBySuccess(res);
+    }
+    @PostMapping("/reset_password")
+    public ResultVo resetPassword(@RequestParam("passwordOld") String passwordOld,
+                                  @RequestParam("passwordNew") String passwordNew,
+                                  @RequestParam("username") String username){
+        boolean res = userService.resetPassword(passwordOld, passwordNew, username);
+        if (res){
+            return ResultVo.createBySuccess("更新密码成功");
+        }return ResultVo.createByError("更新密码失败");
+    }
+
 }
