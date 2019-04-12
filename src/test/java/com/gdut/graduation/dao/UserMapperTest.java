@@ -32,4 +32,13 @@ public class UserMapperTest {
     public void test(){
         System.out.println(1);
     }
+
+    @Test
+    public void updateByPrimaryKeySelective(){
+        User user = new User();
+        user.setEmail("123456@qq.com");
+        user.setId(1007);
+        int count = userMapper.updateByPrimaryKeySelective(user);
+        Assert.assertNotEquals(0,count);
+    }
 }

@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @Description 测试收获地址服务
  * @Author Skye
@@ -32,7 +30,7 @@ public class ShippingServiceImplTest {
         Shipping shipping = new Shipping();
         shipping.setUserId(userId);
         shipping.setReceiverName("黄家豪");
-        shipping.setReveiverPhone("18212344321");
+        shipping.setReceiverPhone("18212344321");
         shipping.setReceiverMobile("020-00001010");
         shipping.setReceiverProvince("广东省");
         shipping.setReceiverCity("揭阳市");

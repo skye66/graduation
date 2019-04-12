@@ -27,6 +27,7 @@ public class OrderVo {
     private String sendTime;
     private String endTime;
     private String closeTime;
+    private String createTime;
 
 
     //订单明细

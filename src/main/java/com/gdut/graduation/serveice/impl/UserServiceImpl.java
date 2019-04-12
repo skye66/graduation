@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUserInformation(User user) {
 
         if (userMapper.selectByPrimaryKey(user.getId()) != null) {
-            int count = userMapper.updateByPrimaryKey(user);
+            int count = userMapper.updateByPrimaryKeySelective(user);
             if (count>0) return User2UserDto.convertToDto(user);
         }
         throw  new GraduationException(ResultEnum.USER_UPDATE_ERROR);

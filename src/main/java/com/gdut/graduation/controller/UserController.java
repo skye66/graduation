@@ -51,9 +51,9 @@ public class UserController {
         session.setAttribute(Const.CURRENT_USER,null);
         return ResultVo.createBySuccess();
     }
-    @GetMapping("/update")
+    @PostMapping("/update")
     public ResultVo update(User user,HttpSession session){
-        if (StringUtils.isEmpty(user)||StringUtils.isEmpty(user.getUsername())||StringUtils.isEmpty(user.getPassword())){
+        if (StringUtils.isEmpty(user)){
             throw new GraduationException(ResultEnum.PARAM_ERROR);
         }
         UserDto userDto = (UserDto) session.getAttribute(Const.CURRENT_USER);
@@ -78,8 +78,9 @@ public class UserController {
     @PostMapping("/reset_password")
     public ResultVo resetPassword(@RequestParam("passwordOld") String passwordOld,
                                   @RequestParam("passwordNew") String passwordNew,
-                                  @RequestParam("username") String username){
-        boolean res = userService.resetPassword(passwordOld, passwordNew, username);
+                                  HttpSession session){
+        UserDto userDto = (UserDto) session.getAttribute(Const.CURRENT_USER);
+        boolean res = userService.resetPassword(passwordOld, passwordNew, userDto.getUsername());
         if (res){
             return ResultVo.createBySuccess("更新密码成功");
         }return ResultVo.createByError("更新密码失败");

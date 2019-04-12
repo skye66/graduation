@@ -119,10 +119,13 @@
       <include refid="BaseColumnMap"></include>
       from graduation_product
       where id in
-      <if test="productIdList!=null">
+      <if test="productIdList!=null and productIdList.size()>0">
         <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
         #{item}
         </foreach>
+      </if>
+      <if test="productIdList==null or productIdList.size()==0">
+        (1) and 1=0
       </if>
     </select>
 </mapper>

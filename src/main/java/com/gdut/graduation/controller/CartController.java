@@ -39,7 +39,7 @@ public class CartController {
         return ResultVo.createBySuccess(cartVo);
     }
     @GetMapping("/update")
-    public ResultVo update(HttpSession session, @RequestParam("productId") Integer productId, @RequestParam("quantity") Integer quantity){
+    public ResultVo update(HttpSession session, @RequestParam("productId") Integer productId, @RequestParam("count") Integer quantity){
         UserDto userDto = (UserDto) session.getAttribute(Const.CURRENT_USER);
         if (productId==null||quantity==null||userDto==null){
             log.error("【购物车控制器】参数错误");
@@ -58,12 +58,12 @@ public class CartController {
         }
         boolean res = cartService.delete(userDto.getId(),idList);
         if (res){
-            return ResultVo.createBySuccess("删除成功");
+            return ResultVo.createBySuccess(cartService.list(userDto.getId()));
         }
         else return ResultVo.createByError();
     }
     @GetMapping("/add")
-    public ResultVo add(HttpSession session,@RequestParam("productId") Integer productId, @RequestParam("quantity") Integer quantity){
+    public ResultVo add(HttpSession session,@RequestParam("productId") Integer productId, @RequestParam("count") Integer quantity){
         UserDto userDto = (UserDto) session.getAttribute(Const.CURRENT_USER);
         CartVo cartVo = cartService.create(userDto.getId(),productId,quantity);
         return ResultVo.createBySuccess(cartVo);

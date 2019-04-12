@@ -49,6 +49,28 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdut.graduation.pojo.User">
+     update graduation_user
+     <set>
+       <if test="username != null">
+         username = #{username,jdbcType=VARCHAR},
+       </if>
+       <if test="password != null">
+       `password` = #{password,jdbcType=VARCHAR},
+       </if>
+       <if test="phone != null">
+       phone = #{phone,jdbcType=VARCHAR},
+       </if>
+       <if test="email != null" >
+       email = #{email,jdbcType=VARCHAR},
+       </if>
+       <if test="role != null" >
+       `role` = #{role,jdbcType=INTEGER},
+       </if>
+         update_time = now(),
+     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

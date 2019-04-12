@@ -15,7 +15,6 @@ import com.gdut.graduation.vo.OrderProductVo;
 import com.gdut.graduation.vo.OrderVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import common.Const;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -142,6 +141,7 @@ public class OrderServiceImpl implements OrderService {
         orderVo.setEndTime(DateTimeUtil.datetimeToStr(order.getEndTime()));
         orderVo.setPaymentTime(DateTimeUtil.datetimeToStr(order.getPaymentTime()));
         orderVo.setSendTime(DateTimeUtil.datetimeToStr(order.getSendTime()));
+        orderVo.setCreateTime(DateTimeUtil.datetimeToStr(order.getCreateTime()));
         orderVo.setStatusDesc(Const.OrderStatusEnum.codeOf(order.getStatus()).getMsg());
 
         return orderVo;

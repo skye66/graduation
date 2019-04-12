@@ -30,7 +30,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/detail")
-    public ResultVo detail(@RequestParam("product_id") Integer productId){
+    public ResultVo detail(@RequestParam("productId") Integer productId){
         if (productId == null){
             log.error("【用户控制器】产品id为空");
             throw new GraduationException(ResultEnum.PRODUCT_PARAM_ERROR);
@@ -40,9 +40,9 @@ public class ProductController {
     }
     @GetMapping("/list")
     public ResultVo list(@RequestParam(value = "keyword",required = false) String keyword,
-                         @RequestParam(value = "category_id",required = false) Integer categoryId,
-                         @RequestParam(value = "page_num",defaultValue = "1") int pageNum,
-                         @RequestParam(value = "page_size", defaultValue = "10") int pageSize){
+                         @RequestParam(value = "categoryId",required = false) Integer categoryId,
+                         @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<List<ProductDto>> pageInfo = productService.searchProductListByCategoryKeyWord(categoryId, keyword, pageNum, pageSize);
         return ResultVo.createBySuccess(pageInfo);
     }

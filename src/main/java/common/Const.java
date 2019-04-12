@@ -13,9 +13,9 @@ public class Const {
     public static final String CURRENT_USER = "currentUser";
 
     /**
-     * 产品状态0，表示在售
+     * 产品状态1，表示在售
      */
-    public static final Integer ON_SALE = 0;
+    public static final Integer ON_SALE = 1;
 
     /**
      * 限制产品数量成功，表示库存充足

@@ -12,15 +12,15 @@ import lombok.Getter;
  **/
 @Getter
 public class ResultVo<T> {
-    private int code;
+    private int status;
     private String msg;
     private T data;
-    private ResultVo(int code,String msg){
-        this.code = code;
+    private ResultVo(int status, String msg){
+        this.status = status;
         this.msg = msg;
     }
-    private ResultVo(T data,int code,String msg){
-        this.code = code;
+    private ResultVo(T data, int status, String msg){
+        this.status = status;
         this.msg = msg;
         this.data = data;
     }

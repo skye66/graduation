@@ -95,10 +95,12 @@ public class ProductMapperTest {
     @Test
     public void selectByProductIds(){
         List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        List<Product> productList = productMapper.selectByProductIds(list);
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+        List<Product> productList = productMapper.selectByProductIds(null);
         Assert.assertNotEquals(0,productList.size());
     }
+
+
 }

@@ -46,6 +46,8 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
+    int updateByPrimaryKeySelective(User record);
+
     /**
      * 通过用户名和密码获取用户的信息
      */
@@ -77,4 +79,6 @@ public interface UserMapper {
      * @return
      */
     int checkPassword(@Param("password") String password,@Param("userId") Integer userId);
+
+
 }
