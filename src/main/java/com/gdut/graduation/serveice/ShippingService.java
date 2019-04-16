@@ -1,6 +1,7 @@
 package com.gdut.graduation.serveice;
 
 import com.gdut.graduation.pojo.Shipping;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface ShippingService {
     boolean del(Integer userId,Integer shippingId);
     Shipping update(Integer userId,Shipping shipping);
     Shipping select(Integer userId,Integer shippingId);
-    List<Shipping> selectAll(Integer userId);
+    PageInfo<List<Shipping>> selectAll(Integer userId,int pageNum,int pageSize);
 }

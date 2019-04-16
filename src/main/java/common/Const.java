@@ -33,6 +33,8 @@ public class Const {
 
     public static final String image_host="http://www.xxx.com";
 
+    public static final String ORDER_BY_CREATE_TIME_DESC = "create_time desc";
+
     public interface Role{
         int ROLE_ADMIN = 1;
         int ROLE_USER=0;
@@ -71,6 +73,40 @@ public class Const {
             throw new RuntimeException("没有找到对应的枚举类");
         }
     }
+
+    /**
+     * 支付宝支付回调状态
+     */
+    public interface AlipayCallback{
+        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+        String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
+        String RESPONSE_SUCCESS = "success";
+        String RESPONSE_FAILED = "failed";
+    }
+
+    /**
+     * 支付平台类型
+     */
+    public enum PayPlatformEnum{
+        ALIPAY(1, "支付宝");
+        PayPlatformEnum(int code, String value){
+            this.code = code;
+            this.value = value;
+        }
+        private String value;
+        private int code;
+
+        public String getValue() {
+            return value;
+        }
+        public int getCode() {
+            return code;
+        }
+    }
+
+    /**
+     * 支付类型
+     */
     public enum PaymentStatusEnum{
         ONLINE_PAY(1,"在线支付");
         int code;
@@ -86,9 +122,9 @@ public class Const {
         public String getMsg() {
             return msg;
         }
-        public static OrderStatusEnum codeOf(int code){
-            for (OrderStatusEnum item:
-                    OrderStatusEnum.values()){
+        public static PaymentStatusEnum codeOf(int code){
+            for (PaymentStatusEnum item:
+                    PaymentStatusEnum.values()){
                 if (item.code==code) return item;
             }
             throw new RuntimeException("没有找到对应的枚举类");

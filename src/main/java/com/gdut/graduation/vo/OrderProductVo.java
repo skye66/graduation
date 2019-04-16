@@ -21,7 +21,7 @@ public class OrderProductVo {
     /**
      * 产品总价格
      */
-    private BigDecimal totalPrice;
+    private BigDecimal productTotalPrice;
     /**
      * 订单的图片host
      */

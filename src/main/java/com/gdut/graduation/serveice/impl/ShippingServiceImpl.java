@@ -5,6 +5,8 @@ import com.gdut.graduation.enums.ResultEnum;
 import com.gdut.graduation.exception.GraduationException;
 import com.gdut.graduation.pojo.Shipping;
 import com.gdut.graduation.serveice.ShippingService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,11 +65,13 @@ public class ShippingServiceImpl implements ShippingService {
     }
 
     @Override
-    public List<Shipping> selectAll(Integer userId) {
+    public PageInfo<List<Shipping>> selectAll(Integer userId, int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<Shipping> shippingList = shippingMapper.selectByUserId(userId);
         if (shippingList == null){
             throw new GraduationException(ResultEnum.SHIPPING_SELECT_ERROR);
         }
-        return shippingList;
+        PageInfo pageInfo = new PageInfo(shippingList);
+        return pageInfo;
     }
 }

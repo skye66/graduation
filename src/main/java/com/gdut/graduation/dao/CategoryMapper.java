@@ -26,6 +26,8 @@ public interface CategoryMapper {
      */
     Integer updateByCategory(Category category);
 
+    Integer updateByCategorySelective(Category category);
+
     /**
      * 通过主键id，删除类目
      * @param id

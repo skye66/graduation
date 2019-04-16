@@ -20,6 +20,7 @@ public class OrderVo {
     private String orderNo;
     private BigDecimal payment;
     private Integer paymentType;
+    private String paymentTypeDesc;
     private BigDecimal postage;
     private Integer status;
     private String statusDesc;

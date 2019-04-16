@@ -35,7 +35,7 @@ public class ProductManageController {
 
 
     @GetMapping("/set_sale_status")
-    public ResultVo setSaleStatus(@RequestParam("product_id") Integer productId, Integer status){
+    public ResultVo setSaleStatus(@RequestParam("productId") Integer productId, Integer status){
         if (productId==null||status==null){
             log.error("【产品后台管理】产品id错误或产品状态为空");
             throw new GraduationException(ResultEnum.PRODUCT_PARAM_ERROR);
@@ -57,16 +57,17 @@ public class ProductManageController {
     }
 
     @GetMapping("/list")
-    public ResultVo list(@RequestParam(value = "page_num",defaultValue = "1") Integer pageNum,@RequestParam(value = "page_size",defaultValue = "10") Integer pageSize){
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
+                         @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
         PageInfo pageInfo = productService.selectProductAll(pageNum,pageSize);
         return ResultVo.createBySuccess(pageInfo);
 
     }
     @GetMapping("/search")
-    public ResultVo productSearch(@RequestParam(value = "product_name",required = false) String productName,
-                                  @RequestParam(value = "product_id",required = false) Integer productId,
-                                  @RequestParam(value = "page_num",defaultValue = "1") int pageNum,
-                                  @RequestParam(value = "page_size",defaultValue = "10") int pageSize){
+    public ResultVo productSearch(@RequestParam(value = "productName",required = false) String productName,
+                                  @RequestParam(value = "productId",required = false) Integer productId,
+                                  @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                  @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         PageInfo pageInfo = productService.searchProductList(productName,productId,pageNum,pageSize);
         return ResultVo.createBySuccess(pageInfo);
     }

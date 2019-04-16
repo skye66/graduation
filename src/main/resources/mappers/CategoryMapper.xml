@@ -25,6 +25,19 @@
           update_time=now()
         where id=#{id,jdbcType=VARCHAR}
     </update>
+    <update id="updateByCategorySelective" parameterType="com.gdut.graduation.pojo.Category">
+         update graduation_category
+         <set>
+             <if test="parentId!=null">
+                 parent_id=#{parentId,jdbcType=VARCHAR},
+             </if>
+             <if test="name!=null">
+                 name = #{name,jdbcType=VARCHAR},
+             </if>
+             update_time = now()
+         </set>
+        where id=#{id,jdbcType=VARCHAR}
+    </update>
     <delete id="deleteByCategory" parameterType="int">
         delete from graduation_category
         where

@@ -1,3 +1,13 @@
 spring:
   profiles:
     active: dev
+  mvc:
+    static-path-pattern: /image/**
+  resources:
+    static-locations: file:E://picture/
+
+alipay:
+  url: http://skye.ngrok.xiaomiqiu.cn/graduation/order/alipay_callback
+project:
+  path: E://picture
+  imageHost: http://localhost:8080/graduation/image/

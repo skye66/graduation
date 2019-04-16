@@ -28,12 +28,13 @@ public class GraduationAuthorizedAspect {
     @Pointcut("execution(public * com.gdut.graduation.controller.*.*(..))" +
             "&& !execution(public * com.gdut.graduation.controller.UserController.login(..))" +
             "&& !execution(public * com.gdut.graduation.controller.UserController.register(..))" +
-            "&& !execution(public * com.gdut.graduation.controller.UserController.checkValid(..))")
+            "&& !execution(public * com.gdut.graduation.controller.UserController.checkValid(..))" +
+            "&& !execution(public * com.gdut.graduation.controller.OrderController.alipayCallback(..) )")
     public void verifyUser(){
 
     }
     @Pointcut("execution(public * com.gdut.graduation.controller.portal.*.*(..)) " +
-            "&& !execution(public * com.gdut.graduation.controller.portal.UserManageController.*(..)))")
+            "&& !execution(public * com.gdut.graduation.controller.portal.UserManageController.*(..)))" )
     public void verifyAdmin(){
 
     }

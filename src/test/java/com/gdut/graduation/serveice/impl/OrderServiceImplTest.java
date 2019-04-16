@@ -1,5 +1,7 @@
 package com.gdut.graduation.serveice.impl;
 
+import com.gdut.graduation.configration.AlipayProperties;
+import com.gdut.graduation.configration.ProjectConfig;
 import com.gdut.graduation.pojo.Order;
 import com.gdut.graduation.serveice.OrderService;
 import com.gdut.graduation.vo.OrderProductVo;
@@ -29,6 +31,11 @@ public class OrderServiceImplTest {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private AlipayProperties alipayProperties;
+    @Autowired
+    private ProjectConfig projectConfig;
+
     private final static String orderNo = "947f28e3-0575-46ff-a704-6dd1cc690723";
     @Test
     public void queryOrderPayStatus() {
@@ -90,5 +97,22 @@ public class OrderServiceImplTest {
     public void manageSendGoods() {
         String res = orderService.manageSendGoods(orderNo);
         System.out.printf(res);
+    }
+
+    @Test
+    public void alipayProperties(){
+        String url = alipayProperties.getUrl();
+        System.out.println(url);
+        Assert.assertNotNull(url);
+    }
+    @Test
+    public void projectPath(){
+        String path = projectConfig.getPath();
+        Assert.assertNotNull(path);
+    }
+    @Test
+    public void projectImageHost(){
+        String imageHost = projectConfig.getImageHost();
+        Assert.assertNotNull(imageHost);
     }
 }

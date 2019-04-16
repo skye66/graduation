@@ -21,13 +21,13 @@ public interface CategoryService {
 
     /**
      * 查找所有的同级节点
-     * @param categoryId
+     * @param parentId
      * @return
      */
-    List<Category> getParallelId(int categoryId);
+    List<Category> getParallelId(int parentId);
 
     /**
-     * 获取平级节点和所有自己点的id
+     * 获取平级节点和所有子节点的id
      * @param parentId
      * @return
      */

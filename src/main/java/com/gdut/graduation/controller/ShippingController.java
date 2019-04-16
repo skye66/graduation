@@ -11,10 +11,7 @@ import common.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -31,11 +28,12 @@ public class ShippingController {
     @Autowired
     private ShippingService shippingService;
     @GetMapping("/list")
-    public ResultVo list(HttpSession session){
+    public ResultVo list(HttpSession session, @RequestParam(value = "pageNum", defaultValue = "0") int pageNum,
+                         @RequestParam(value = "pageSize", defaultValue = "10")int pageSize){
         UserDto user = (UserDto) session.getAttribute(Const.CURRENT_USER);
         if (user==null) throw new GraduationException(ResultEnum.USER_NO_LOGIN);
         Integer userId = user.getId();
-        return ResultVo.createBySuccess(shippingService.selectAll(userId));
+        return ResultVo.createBySuccess(shippingService.selectAll(userId,pageNum,pageSize));
     }
     @GetMapping("/information")
     public ResultVo information(HttpSession session,Integer shippingId){

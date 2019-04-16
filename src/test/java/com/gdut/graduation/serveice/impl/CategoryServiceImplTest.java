@@ -37,7 +37,7 @@ public class CategoryServiceImplTest {
 
     @Test
     public void getParallelId() {
-        List<Category> categoryList = categoryService.getParallelId(1);
+        List<Category> categoryList = categoryService.getParallelId(0);
         Assert.assertNotEquals(categoryList.size(),0);
     }
 

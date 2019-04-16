@@ -2,9 +2,11 @@ package com.gdut.graduation.serveice;
 
 import com.gdut.graduation.vo.OrderProductVo;
 import com.gdut.graduation.vo.OrderVo;
+import com.gdut.graduation.vo.ResultVo;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description 订单服务（订单详情管理、订单支付管理等）
@@ -14,6 +16,9 @@ import java.util.List;
  **/
 public interface OrderService {
 
+    ResultVo pay(String orderNo, Integer userId, String path);
+
+    ResultVo aliCallBack(Map<String, String> params);
     boolean queryOrderPayStatus(Integer userId,String orderNo);
 
     OrderVo createOrder(Integer userId, Integer shippingId);

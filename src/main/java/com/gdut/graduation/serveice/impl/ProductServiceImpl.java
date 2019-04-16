@@ -15,6 +15,7 @@ import common.Const;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         //PageHelper
         //填充sql语句
         //PageInfo结尾
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize,Const.ORDER_BY_CREATE_TIME_DESC);
         List<Product> productList = productMapper.selectAll();
         List<ProductDto> productDtoList = Product2ProductDto.converter(productList);
         PageInfo pageInfo = new PageInfo<>(productList);
@@ -112,6 +113,7 @@ public class ProductServiceImpl implements ProductService {
             throw new GraduationException(ResultEnum.PRODUCT_NOT_EXISTS);
         }
         product.setStatus(status);
+        productMapper.updateByPrimaryKey(product);
         return Product2ProductDto.converter(product);
     }
 
@@ -135,7 +137,7 @@ public class ProductServiceImpl implements ProductService {
         List<Integer> categoryIdList = new ArrayList<>();
         if (categoryId !=null){
             Set<Category> categorySet = categoryService.getChildParallelCategory(categoryId);
-            if (categorySet==null&&StringUtils.isEmpty(keyword)){
+            if (CollectionUtils.isEmpty(categorySet) && StringUtils.isEmpty(keyword)){
                 PageHelper.startPage(pageNum, pageSize);
                 List<ProductDto> productDtoList = new ArrayList<>();
                 PageInfo pageInfo = new PageInfo(productDtoList);

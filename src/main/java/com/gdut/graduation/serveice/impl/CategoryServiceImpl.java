@@ -35,31 +35,28 @@ public class CategoryServiceImpl implements CategoryService {
         return category;
     }
 
-    @Override
-    public List<Category> getParallelId(int categoryId) {
-        Category category = categoryMapper.selectById(categoryId);
-        if (category==null){
-            log.error("【类目】查询id为空");
-            throw new GraduationException(ResultEnum.CATEGORY_ID_EMPTY);
-        }
 
-        List<Category> categoryList = categoryMapper.selectParallelId(category.getParentId());
+    @Override
+    public List<Category> getParallelId(int parentId) {
+
+        List<Category> categoryList = categoryMapper.selectParallelId(parentId);
         return categoryList;
     }
 
+    /**
+     * 查找所有的子节点
+     * @param parentId
+     * @return
+     */
     @Override
     public Set<Category> getChildParallelCategory(int parentId) {
         Set<Category> categorySet = new HashSet<>();
-        getChildParallelCategory(categoryMapper.selectById(parentId),categorySet);
+        Category category = new Category();
+        category.setId(parentId);
+        getChildParallelCategory(category,categorySet);
         return categorySet;
     }
-    private  List<Category> getChildCategory(Integer parentId){
-        List<Category> categoryList=null;
-        if (parentId != null) {
-             categoryList = categoryMapper.selectParallelId(parentId);
-        }
-        return categoryList;
-    }
+
     private void getChildParallelCategory(Category category, Set<Category> categorySet) {
         if (category==null) return;
         categorySet.add(category);
@@ -70,11 +67,18 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
     }
+    private  List<Category> getChildCategory(Integer parentId){
+        List<Category> categoryList=null;
+        if (parentId != null) {
+            categoryList = categoryMapper.selectParallelId(parentId);
+        }
+        return categoryList;
+    }
 
     @Override
     public Category updateCategory(Category category) {
 
-        int count = categoryMapper.updateByCategory(category);
+        int count = categoryMapper.updateByCategorySelective(category);
         if (count==0){
             log.error("【类目】更新失败");
             throw new GraduationException(ResultEnum.CATEGORY_UPDATE_ERROR);

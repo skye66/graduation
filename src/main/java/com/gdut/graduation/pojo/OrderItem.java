@@ -385,7 +385,7 @@ public class OrderItem implements Serializable {
         sb.append(", productImage=").append(productImage);
         sb.append(", currentUnitPrice=").append(currentUnitPrice);
         sb.append(", quantity=").append(quantity);
-        sb.append(", totalPrice=").append(totalPrice);
+        sb.append(", productTotalPrice=").append(totalPrice);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

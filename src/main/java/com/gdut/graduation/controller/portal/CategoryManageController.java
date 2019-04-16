@@ -26,7 +26,7 @@ public class CategoryManageController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/information")
-    public ResultVo information(@RequestParam("category_id") Integer categoryId){
+    public ResultVo information(@RequestParam("categoryId") Integer categoryId){
         if (categoryId ==null){
             log.error("【类目】类目id为空");
             throw new GraduationException(ResultEnum.CATEGORY_ID_EMPTY);
@@ -35,25 +35,24 @@ public class CategoryManageController {
         return ResultVo.createBySuccess(category);
     }
     @PostMapping("/update")
-    public ResultVo update(Category category){
-        if (StringUtils.isEmpty(category)||category.getId()==null||category.getParentId()==null){
-            log.error("【类目】更新失败,{}",category);
-            throw new GraduationException(ResultEnum.CATEGORY_UPDATE_ERROR);
-        }
+    public ResultVo update(@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId,@RequestParam("categoryName") String categoryName ){
+
+        Category category = new Category();
+        category.setId(categoryId);
+        category.setName(categoryName);
         Category res = categoryService.updateCategory(category);
         return ResultVo.createBySuccess(res);
     }
     @PostMapping("/create")
-    public ResultVo create(Category category){
-        if (StringUtils.isEmpty(category)||category.getId()==null||category.getParentId()==null){
-            log.error("【类目】添加失败,{}",category);
-            throw new GraduationException(ResultEnum.CATEGORY_CREATE_ERROR);
-        }
+    public ResultVo create(@RequestParam(value = "parentId",defaultValue = "0") Integer parentId,@RequestParam("categoryName") String categoryName){
+        Category category = new Category();
+        category.setName(categoryName);
+        category.setParentId(parentId);
         Category res = categoryService.createCategory(category);
         return ResultVo.createBySuccess(res);
     }
     @GetMapping("/delete")
-    public ResultVo delete(@RequestParam("category_id") Integer categoryId){
+    public ResultVo delete(@RequestParam("categoryId") Integer categoryId){
         if (categoryId==null) {
             log.error("【类目】类目id为空");
             throw new GraduationException(ResultEnum.CATEGORY_EMPTY);
@@ -63,7 +62,7 @@ public class CategoryManageController {
         else return ResultVo.createByError(ResultEnum.CATEGORY_ID_EMPTY);
     }
     @GetMapping("/parallel")
-    public ResultVo parallel(@RequestParam("category_id") Integer categoryId){
+    public ResultVo parallel(@RequestParam("categoryId") Integer categoryId){
         if (categoryId == null){
             log.error("【类目】id为空");
             throw new GraduationException(ResultEnum.CATEGORY_ID_EMPTY);
@@ -72,8 +71,14 @@ public class CategoryManageController {
         return ResultVo.createBySuccess(categoryList);
     }
     @GetMapping("/deep_children_category")
-    public ResultVo deepChildrenCategory(@RequestParam(value = "category_id",defaultValue = "0") Integer categoryId){
+    public ResultVo deepChildrenCategory(@RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId){
         Set<Category> categorySet = categoryService.getChildParallelCategory(categoryId);
         return ResultVo.createBySuccess(categorySet);
+    }
+    @GetMapping("/get_category")
+    public ResultVo getCategory(@RequestParam("categoryId") Integer parentId){
+
+        List<Category> categoryList = categoryService.getParallelId(parentId);
+        return ResultVo.createBySuccess(categoryList);
     }
 }
